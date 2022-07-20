@@ -42,4 +42,3 @@ def load_data(one_hot_encoding=True):
     print('Test labels shape: {}'.format(y_test.shape))
 
     return X_train, y_train, X_test, y_test
-
