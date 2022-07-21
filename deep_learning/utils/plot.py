@@ -24,3 +24,27 @@ def plot_dataset(dataloader, grid_width=8, grid_height=2, figure_width=12, figur
             img_idx += 1
         plt.subplots_adjust(left=0, bottom=0, right=1, top=1, wspace=0, hspace=0.25) # subplot 간 간격조절
     plt.show()
+
+
+def plot_history(history):
+    plt.figure(figsize=(3 * 13, 4))
+    plt.subplot(1, 5, 1)
+    plt.title("Training and Validation Loss")
+    plt.plot(history['train_loss'], label="train_loss")
+    plt.plot(history['test_loss'], label="test_loss")
+    plt.xlabel("iterations")
+    plt.ylabel("Loss")
+    plt.legend()
+    plt.subplot(1, 5, 2)
+    plt.title("Training and Validation Accuracy")
+    plt.plot(history['train_acc'], label="train_acc")
+    plt.plot(history['test_acc'], label="test_acc")
+    plt.xlabel("iterations")
+    plt.ylabel("Accuracy")
+    plt.legend()
+    plt.subplot(1, 5, 3)
+    plt.title("Learning Rate")
+    plt.plot(history['lr'], label="learning rate")
+    plt.xlabel("iterations")
+    plt.ylabel("LR")
+    plt.show()
