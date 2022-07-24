@@ -1,6 +1,33 @@
 import matplotlib.pyplot as plt
+import numpy as np
 
-def plot_dataset(dataloader, grid_width=8, grid_height=2, figure_width=12, figure_height=3, y_hats=None):
+
+def CIFAR_plot_dataset(dataloader, grid_width=8, grid_height=2, figure_width=12, figure_height=3, y_hats=None):
+    images, labels = next(iter(dataloader))
+    f, ax = plt.subplots(grid_height, grid_width)
+    f.set_size_inches(figure_width, figure_height)
+    img_idx = 0
+    for i in range(0, grid_height):
+        for j in range(0, grid_width):
+            image = images[img_idx]
+            label = labels[img_idx]
+            title_color = 'k'
+            if y_hats is None:
+                label_idx = int(label)
+            else:
+                label_idx = int(y_hats[img_idx])
+                if int(labels[img_idx]) != label_idx:
+                    title_color = 'r'
+            label = ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck'][label_idx]
+            ax[i][j].axis('off')
+            ax[i][j].set_title(label, color=title_color)
+            ax[i][j].imshow(np.transpose(image, (1, 2, 0)), aspect='auto')
+            img_idx += 1
+        plt.subplots_adjust(left=0, bottom=0, right=1, top=1, wspace=0, hspace=0.25)
+    plt.show()
+
+    
+def FashionMNIST_plot_dataset(dataloader, grid_width=8, grid_height=2, figure_width=12, figure_height=3, y_hats=None):
     images, labels = next(iter(dataloader))
     f, ax = plt.subplots(grid_height, grid_width)
     f.set_size_inches(figure_width, figure_height)
